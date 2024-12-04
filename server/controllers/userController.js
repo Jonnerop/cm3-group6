@@ -7,19 +7,16 @@ const generateToken = (_id) => {
 };
 
 const signup = async (req, res) => {
-  console.log(req.body);
-  const {
-    name,
-    username,
-    password,
-    phone_number,
-    gender,
-    date_of_birth,
-    membership_status,
-    address,
-    profile_picture,
-  } = { ...req.body };
   try {
+    const signUpData = { ...req.body };
+    console.log(signUpData);
+    const { name, username, password, phone_number, gender, date_of_birth, membership_status, address } = signUpData;
+    if (req.file) {
+      profile_picture = req.file.path; // Save the file path to the picture field
+    } else {
+      profile_picture = '';
+    }
+
     if (
       !name ||
       !username ||
@@ -44,14 +41,14 @@ const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const user = await User.create({
-      name,
-      username,
+      name: name,
+      username: username,
       password: hashedPassword,
-      phone_number,
-      gender,
-      date_of_birth,
-      membership_status,
-      address,
+      phone_number: phone_number,
+      gender: gender,
+      date_of_birth: date_of_birth,
+      membership_status: membership_status,
+      address: address,
       profile_picture,
     });
 

@@ -1,18 +1,18 @@
-import useField from '../hooks/useField';
-import useSignup from '../hooks/useSignup';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import useField from "../hooks/useField";
+import useSignup from "../hooks/useSignup";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const name = useField('text');
-  const userName = useField('text');
-  const password = useField('password');
-  const phoneNumber = useField('text');
-  const gender = useField('text');
-  const dateOfBirth = useField('date');
-  const membershipStatus = useField('text');
-  const address = useField('text');
+  const name = useField("text");
+  const userName = useField("text");
+  const password = useField("password");
+  const phoneNumber = useField("text");
+  const gender = useField("text");
+  const dateOfBirth = useField("date");
+  const membershipStatus = useField("text");
+  const address = useField("text");
   const [profilePicture, setProfilePicture] = useState(null);
   const { signup, error } = useSignup(`/api/users/signup`);
 
@@ -20,24 +20,27 @@ const SignUp = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('name', name.value);
-    formData.append('username', userName.value);
-    formData.append('password', password.value);
-    formData.append('phone_number', phoneNumber.value);
-    formData.append('gender', gender.value);
-    formData.append('date_of_birth', dateOfBirth.value);
-    formData.append('membership_status', membershipStatus.value);
-    formData.append('address', address.value);
-    console.log(formData);
+    formData.append("name", name.value);
+    formData.append("username", userName.value);
+    formData.append("password", password.value);
+    formData.append("phone_number", phoneNumber.value);
+    formData.append("gender", gender.value);
+    formData.append("date_of_birth", dateOfBirth.value);
+    formData.append("membership_status", membershipStatus.value);
+    formData.append("address", address.value);
 
     if (profilePicture) {
-      formData.append('profile_picture', profilePicture);
+      formData.append("profile_picture", profilePicture);
     }
 
-    await signup(formData);
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
+    signup(formData);
     if (!error) {
-      console.log('success');
-      navigate('/');
+      console.log("success");
+      navigate("/");
     }
   };
 
@@ -117,6 +120,7 @@ const SignUp = () => {
               {...membershipStatus}
               className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm focus:ring-[#29B6F6] focus:border-[#29B6F6]"
             >
+              <option value="">Select membership status</option>
               <option value="Active">Active</option>
               <option value="Inactive">Inactive</option>
             </select>

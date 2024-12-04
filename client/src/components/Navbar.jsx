@@ -1,11 +1,12 @@
-import { useAuth } from '../context/AuthProvider';
+import { useAuth } from "../context/AuthProvider";
 
 const Navbar = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, setIsAuthenticated } = useAuth();
 
   const logout = () => {
-    localStorage.removeItem('user');
-    window.location.href = '/';
+    localStorage.removeItem("user");
+    setIsAuthenticated(false);
+    window.location.href = "/";
   };
 
   return (
@@ -33,10 +34,9 @@ const Navbar = () => {
             </a>
           </>
         ) : (
-          <a href="/logout" className="mx-4">
+          <button onClick={logout} className="mx-4">
             Logout
-            {logout}
-          </a>
+          </button>
         )}
       </div>
     </nav>
