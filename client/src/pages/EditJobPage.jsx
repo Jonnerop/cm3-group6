@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const EditJobPage = () => {
   const navigate = useNavigate();
@@ -8,35 +8,35 @@ const EditJobPage = () => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
 
-  const [title, setTitle] = useState('');
-  const [type, setType] = useState('');
-  const [description, setDescription] = useState('');
-  const [companyName, setCompanyName] = useState('');
-  const [contactEmail, setContactEmail] = useState('');
-  const [contactPhone, setContactPhone] = useState('');
-  const [website, setWebsite] = useState('');
-  const [location, setLocation] = useState('');
-  const [salary, setSalary] = useState('');
-  const [postedDate, setPostedDate] = useState('');
-  const [stat, setStat] = useState('');
-  const [applicationDeadline, setApplicationDeadline] = useState('');
-  const [requirements, setRequirements] = useState('');
+  const [title, setTitle] = useState("");
+  const [type, setType] = useState("");
+  const [description, setDescription] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [website, setWebsite] = useState("");
+  const [location, setLocation] = useState("");
+  const [salary, setSalary] = useState("");
+  const [postedDate, setPostedDate] = useState("");
+  const [stat, setStat] = useState("");
+  const [applicationDeadline, setApplicationDeadline] = useState("");
+  const [requirements, setRequirements] = useState("");
 
   const updateJob = async (updatedJob) => {
     try {
       const response = await fetch(`/api/jobs/${updatedJob.id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedJob),
       });
       if (!response.ok) {
-        throw new Error('Failed to update job');
+        throw new Error("Failed to update job");
       }
       return response.ok;
     } catch (error) {
-      console.error('Error updating job:', error);
+      console.error("Error updating job:", error);
       return false;
     }
   };
@@ -65,7 +65,7 @@ const EditJobPage = () => {
         setApplicationDeadline(data.applicationDeadline);
         setRequirements(data.requirements);
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       } finally {
         setLoading(false);
       }
@@ -99,8 +99,8 @@ const EditJobPage = () => {
     if (success) {
       navigate(`/jobs/${job.id}`);
     } else {
-      alert('Failed to update job');
-      console.error('Failed to update job');
+      alert("Failed to update job");
+      console.error("Failed to update job");
     }
   };
 
