@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../context/AuthProvider";
 
 const EditJobPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const [job, setJob] = useState(null);
+  const { user, token } = useAuth();
 
   const [title, setTitle] = useState('');
   const [type, setType] = useState('');
@@ -21,9 +23,6 @@ const EditJobPage = () => {
   const [stat, setStat] = useState('');
   const [applicationDeadline, setApplicationDeadline] = useState('');
   const [requirements, setRequirements] = useState('');
-
-  const user = JSON.parse(localStorage.getItem('user'));
-  const token = user.token;
 
   const updateJob = async (updatedJob) => {
     try {

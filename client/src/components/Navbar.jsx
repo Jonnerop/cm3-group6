@@ -26,15 +26,15 @@ const Navbar = () => {
         </a>
         {!isAuthenticated ? (
           <>
-            <a href="/signup" className="mx-4">
+            <a href="/signup" className="mx-6 text-[#29B6F6] text-xl font-semibold">
               Sign Up
             </a>
-            <a href="/login" className="mx-4">
+            <a href="/login" className="mx-6 text-[#29B6F6] text-xl font-semibold">
               Login
             </a>
           </>
         ) : (
-          <button onClick={logout} className="mx-4">
+          <button onClick={logout} className="mx-6 text-[#29B6F6] text-xl font-semibold">
             Logout
           </button>
         )}

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../context/AuthProvider";
 
 const AddJobPage = () => {
   const navigate = useNavigate();
+  const { token } = useAuth();
 
   const [title, setTitle] = useState('');
   const [type, setType] = useState('Full-Time');
@@ -17,9 +19,6 @@ const AddJobPage = () => {
   const [stat, setStat] = useState('Open');
   const [applicationDeadline, setApplicationDeadline] = useState('');
   const [requirements, setRequirements] = useState('');
-
-  const user = JSON.parse(localStorage.getItem('user'));
-  const token = user.token;
 
   const addJob = async (newJob) => {
     console.log(newJob);

@@ -8,10 +8,7 @@ function JobPage() {
   const { id } = useParams();
   const [job, setJob] = useState([]);
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
-
-  const user = JSON.parse(localStorage.getItem('user'));
-  const token = user ? user.token : null;
+  const { isAuthenticated, token } = useAuth();
 
   useEffect(() => {
     const fetchJob = async () => {
@@ -52,10 +49,10 @@ function JobPage() {
   };
 
   return (
-    <div className="flex bg-[#F5F5F5] justify-center items-center w-screen h-[100%]">
+    <div className="flex bg-[#F5F5F5] justify-center w-screen h-screen">
       <div
         id="job-container"
-        className="flex flex-col bg-[#E0E0E0] border rounded-lg shadow-md p-4"
+        className="flex flex-col bg-[#E0E0E0] border rounded-lg shadow-md p-4 mt-8 h-[450px]"
       >
         <JobListing {...job} />
         {isAuthenticated ? (
