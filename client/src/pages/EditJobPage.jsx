@@ -60,9 +60,9 @@ const EditJobPage = () => {
         setWebsite(data.company.website);
         setLocation(data.location);
         setSalary(data.salary);
-        setPostedDate(data.postedDate);
+        setPostedDate(data.postedDate.split("T")[0]);
         setStat(data.stat);
-        setApplicationDeadline(data.applicationDeadline);
+        setApplicationDeadline(data.applicationDeadline.split("T")[0]);
         setRequirements(data.requirements);
       } catch (error) {
         console.error("Error:", error);
@@ -78,26 +78,26 @@ const EditJobPage = () => {
     e.preventDefault();
 
     const updatedJob = {
-      id: job.id,
+      id: job._id,
       title,
       type,
       description,
       company: {
-        companyName,
-        companyEmail,
-        companyPhone,
-        companyUrl,
+        name: companyName,
+        contactEmail,
+        contactPhone,
+        website,
       },
       location,
       salary,
       postedDate,
-      stat,
+      status: stat,
       applicationDeadline,
       requirements,
     };
     const success = await updateJob(updatedJob);
     if (success) {
-      navigate(`/jobs/${job.id}`);
+      navigate(`/job/${job._id}`);
     } else {
       alert("Failed to update job");
       console.error("Failed to update job");
@@ -119,12 +119,19 @@ const EditJobPage = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
           <label htmlFor="type">Type</label>
-          <input
-            type="text"
+          <select
             id="type"
             value={type}
             onChange={(e) => setType(e.target.value)}
-          />
+            className="p-2 border rounded"
+          >
+            <option value="">Select job Type</option>
+            <option value="full-time">Full-Time</option>
+            <option value="part-time">Part-Time</option>
+            <option value="contract">Contract</option>
+            <option value="internship">Internship</option>
+            <option value="temporary">Temporary</option>
+          </select>
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
@@ -181,12 +188,16 @@ const EditJobPage = () => {
             onChange={(e) => setPostedDate(e.target.value)}
           />
           <label htmlFor="stat">Stat</label>
-          <input
-            type="text"
-            id="stat"
+          <select
+            id="status"
             value={stat}
             onChange={(e) => setStat(e.target.value)}
-          />
+            className="p-2 border rounded"
+          >
+            <option value="">Select job vacancy</option>
+            <option value="open">Open</option>
+            <option value="closed">Closed</option>
+          </select>
           <label htmlFor="applicationDeadline">Application Deadline</label>
           <input
             type="date"

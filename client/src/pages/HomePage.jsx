@@ -28,7 +28,10 @@ const HomePage = () => {
       <div className="flex m-auto">
         <h1 className="text-[#29B6F6] text-xl font-semibold">Job Listings</h1>
       </div>
-      <div id="Jobs-container" className="flex flex-wrap justify-between">
+      <div
+        id="Jobs-container"
+        className="flex flex-wrap justify-center w-screen"
+      >
         {isPending && <div className="border">Loading...</div>}
         {jobs && <JobListings jobs={jobs} />}
       </div>

@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="job/:id" element={<JobPage />} />
-            <Route path="job/edit/:id" element={<EditJobPage />} />
+            <Route path="job/:id/edit" element={<EditJobPage />} />
             <Route path="create" element={<AddJobPage />} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Route>
