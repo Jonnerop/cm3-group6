@@ -52,16 +52,16 @@ const signup = async (req, res) => {
       profile_picture,
     });
 
-    if (user) {
-      const token = generateToken(user._id);
-      res.status(201).json({ username, token });
-    } else {
-      res.status(400).json({ message: 'Invalid user data' });
-      throw new Error('Invalid user data');
+        if (user) {
+            const token = generateToken(user._id);
+            res.status(201).json({ username, token });
+        } else {
+            res.status(400);
+            throw new Error('Invalid user data');
+        }
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
 };
 
 const login = async (req, res) => {
