@@ -8,5 +8,10 @@
   "keywords": [],
   "author": "Mika Laakkonen",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "mongoose": "^8.8.3"
+  }
 }
