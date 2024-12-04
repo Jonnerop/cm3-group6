@@ -37,7 +37,7 @@ const AddJobPage = () => {
     return true;
   };
 
-  const submitForm  = (e) => {
+  const submitForm = (e) => {
     e.preventDefault();
 
     const newJob = {
@@ -62,100 +62,224 @@ const AddJobPage = () => {
   };
 
   return (
-    <div id="addJobPage">
-      <h1>Add Job</h1>
-        <form onSubmit={submitForm}>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <label htmlFor="type">Type</label>
-          <input
-            type="text"
-            id="type"
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-          />
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <label htmlFor="companyName">Company Name</label>
-          <input
-            type="text"
-            id="companyName"
-            value={companyName}
-            onChange={(e) => setCompanyName(e.target.value)}
-          />
-          <label htmlFor="companyEmail">Company Email</label>
-          <input
-            type="email"
-            id="companyEmail"
-            value={contactEmail}
-            onChange={(e) => setContactEmail(e.target.value)}
-          />
-          <label htmlFor="companyPhone">Company Phone</label>
-          <input
-            type="tel"
-            id="companyPhone"
-            value={contactPhone}
-            onChange={(e) => setContactPhone(e.target.value)}
-          />
-          <label htmlFor="companyUrl">Company URL</label>
-          <input
-            type="url"
-            id="companyUrl"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-          />
-          <label htmlFor="location">Location</label>
-          <input
-            type="text"
-            id="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
-          <label htmlFor="salary">Salary</label>
-          <input
-            type="text"
-            id="salary"
-            value={salary}
-            onChange={(e) => setSalary(e.target.value)}
-          />
-          <label htmlFor="postedDate">Posted Date</label>
-          <input
-            type="date"
-            id="postedDate"
-            value={postedDate}
-            onChange={(e) => setPostedDate(e.target.value)}
-          />
-          <label htmlFor="stat">Stat</label>
-          <input
-            type="text"
-            id="stat"
-            value={stat}
-            onChange={(e) => setStat(e.target.value)}
-          />
-          <label htmlFor="applicationDeadline">Application Deadline</label>
-          <input
-            type="date"
-            id="applicationDeadline"
-            value={applicationDeadline}
-            onChange={(e) => setApplicationDeadline(e.target.value)}
-          />
-          <label htmlFor="requirements">Requirements</label>
-          <textarea
-            id="requirements"
-            value={requirements}
-            onChange={(e) => setRequirements(e.target.value)}
-          />
-          <button type="submit">Add Job</button>
+    <div
+      id="addJobPage"
+      className="min-h-screen bg-[#B3E5FC] flex items-center justify-center py-8"
+    >
+      <div className="max-w-xl w-full space-y-8 bg-white p-6 rounded-lg shadow-lg">
+        <h1 className="text-2xl font-bold text-[#607D8B]">Add Job</h1>
+        <form onSubmit={submitForm} className="grid grid-cols-1 gap-6">
+          <div>
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-[#607D8B]"
+            >
+              Title
+            </label>
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+            />
+          </div>
+          <div className="flex flex-col items-center justify-center">
+            <label
+              htmlFor="type"
+              className="block text-sm font-medium text-[#607D8B]"
+            >
+              Type
+            </label>
+
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              className="mt-1 pt-2 block rounded-md shadow-md text-[#607D8B] bg-[#E0E0E0]"
+            >
+              <option value="Full-Time">Full-Time</option>
+              <option value="Part-Time">Part-Time</option>
+              <option value="Remote">Remote</option>
+              <option value="Internship">Internship</option>
+            </select>
+          </div>
+          <div>
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-[#607D8B]"
+            >
+              Description
+            </label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="companyName"
+              className="block text-sm font-medium text-[#607D8B]"
+            >
+              Company Name
+            </label>
+            <input
+              type="text"
+              id="companyName"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="contactEmail"
+              className="block text-sm font-medium text-[#607D8B]"
+            >
+              Company Email
+            </label>
+            <input
+              type="email"
+              id="contactEmail"
+              value={contactEmail}
+              onChange={(e) => setContactEmail(e.target.value)}
+              className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="contactPhone"
+              className="block text-sm font-medium text-[#607D8B]"
+            >
+              Company Phone
+            </label>
+            <input
+              type="tel"
+              id="contactPhone"
+              value={contactPhone}
+              onChange={(e) => setContactPhone(e.target.value)}
+              className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="website"
+              className="block text-sm font-medium text-[#607D8B]"
+            >
+              Company Website
+            </label>
+            <input
+              type="url"
+              id="website"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="location"
+              className="block text-sm font-medium text-[#607D8B]"
+            >
+              Location
+            </label>
+            <input
+              type="text"
+              id="location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md "
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="salary"
+              className="block text-sm font-medium text-[#607D8B]"
+            >
+              Salary
+            </label>
+            <input
+              type="number"
+              id="salary"
+              value={salary}
+              onChange={(e) => setSalary(e.target.value)}
+              className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+            />
+          </div>
+
+          <div className="flex flex-row items-center justify-center">
+            <label
+              htmlFor="postedDate"
+              className="block text-sm font-medium text-[#607D8B] mr-8"
+            >
+              Posted Date:
+            </label>
+            <input
+              type="date"
+              id="postedDate"
+              value={postedDate}
+              onChange={(e) => setPostedDate(e.target.value)}
+              className="mt-1 p-1 block rounded-md bg-[#E0E0E0] shadow-md text-[#607D8B]"
+            />
+          </div>
+          <div div className="flex flex-col items-center justify-center">
+            <label
+              htmlFor="stat"
+              className="block text-sm font-medium text-[#607D8B]"
+            >
+              Status
+            </label>
+            <select
+              value={stat}
+              onChange={(e) => setStat(e.target.value)}
+              className="mt-1 pt-2 block rounded-md shadow-md text-[#607D8B] bg-[#E0E0E0]"
+            >
+              <option value="Open">Open</option>
+              <option value="Cloder">Closed</option>
+            </select>
+          </div>
+
+          <div className="flex flex-row items-center justify-center">
+            <label
+              htmlFor="applicationDeadline"
+              className="block text-sm font-medium text-[#607D8B] mr-8"
+            >
+              Application Deadline:
+            </label>
+            <input
+              type="date"
+              id="applicationDeadline"
+              value={applicationDeadline}
+              onChange={(e) => setApplicationDeadline(e.target.value)}
+              className="mt-1 p-1 block rounded-md bg-[#E0E0E0] shadow-md text-[#607D8B]"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="requirements"
+              className="block text-sm font-medium text-[#607D8B]"
+            >
+              Requirements
+            </label>
+            <textarea
+              id="requirements"
+              value={requirements}
+              onChange={(e) => setRequirements(e.target.value)}
+              className="mt-1 block w-full rounded-md border-[#E0E0E0] shadow-md"
+            />
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="w-full py-2 px-4 bg-[#607D8B] text-white rounded-md shadow-md"
+            >
+              Add Job
+            </button>
+          </div>
         </form>
+      </div>
     </div>
   );
 };
