@@ -22,12 +22,16 @@ const EditJobPage = () => {
   const [applicationDeadline, setApplicationDeadline] = useState('');
   const [requirements, setRequirements] = useState('');
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const token = user.token;
+
   const updateJob = async (updatedJob) => {
     try {
       const response = await fetch(`/api/jobs/${updatedJob.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(updatedJob),
       });
@@ -60,9 +64,9 @@ const EditJobPage = () => {
         setWebsite(data.company.website);
         setLocation(data.location);
         setSalary(data.salary);
-        setPostedDate(data.postedDate.split("T")[0]);
+        setPostedDate(data.postedDate.split('T')[0]);
         setStat(data.stat);
-        setApplicationDeadline(data.applicationDeadline.split("T")[0]);
+        setApplicationDeadline(data.applicationDeadline.split('T')[0]);
         setRequirements(data.requirements);
       } catch (error) {
         console.error('Error:', error);

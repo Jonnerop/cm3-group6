@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
-import JobListing from "../components/JobListing";
-import { useParams } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import JobListing from '../components/JobListing';
+import { useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function JobPage() {
   const { id } = useParams();
   const [job, setJob] = useState([]);
   const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem('user'));
+  const token = user.token;
 
   useEffect(() => {
     const fetchJob = async () => {
@@ -27,7 +30,10 @@ function JobPage() {
   const deleteJob = async () => {
     try {
       const res = await fetch(`/api/jobs/${id}`, {
-        method: "DELETE",
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (!res.ok) {
         throw new Error(res.statusText);
@@ -40,7 +46,7 @@ function JobPage() {
   const handleDelete = (e) => {
     e.preventDefault();
     deleteJob();
-    navigate("/");
+    navigate('/');
   };
 
   return (
