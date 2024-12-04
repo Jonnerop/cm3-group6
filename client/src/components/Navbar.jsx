@@ -1,4 +1,13 @@
+import { useAuth } from '../context/AuthProvider';
+
 const Navbar = () => {
+  const { isAuthenticated } = useAuth();
+
+  const logout = () => {
+    localStorage.removeItem('user');
+    window.location.href = '/';
+  };
+
   return (
     <nav
       id="navbar"
@@ -14,8 +23,21 @@ const Navbar = () => {
         <a href="/create" className="mx-6 text-[#29B6F6] text-xl font-semibold">
           Add Job
         </a>
-        <a href="/signup" className="mx-4">Sign Up</a>
-        <a href="/login" className="mx-4">Login</a>
+        {!isAuthenticated ? (
+          <>
+            <a href="/signup" className="mx-4">
+              Sign Up
+            </a>
+            <a href="/login" className="mx-4">
+              Login
+            </a>
+          </>
+        ) : (
+          <a href="/logout" className="mx-4">
+            Logout
+            {logout}
+          </a>
+        )}
       </div>
     </nav>
   );

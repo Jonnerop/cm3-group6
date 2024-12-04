@@ -21,13 +21,14 @@ const SignUp = () => {
 
     const formData = new FormData();
     formData.append('name', name.value);
-    formData.append('userName', userName.value);
+    formData.append('username', userName.value);
     formData.append('password', password.value);
     formData.append('phone_number', phoneNumber.value);
     formData.append('gender', gender.value);
     formData.append('date_of_birth', dateOfBirth.value);
     formData.append('membership_status', membershipStatus.value);
     formData.append('address', address.value);
+    console.log(formData);
 
     if (profilePicture) {
       formData.append('profile_picture', profilePicture);
