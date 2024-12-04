@@ -16,6 +16,11 @@ const jobSchema = new mongoose.Schema({
     status: { type: String, enum: ['open', 'closed'], default: 'open' }, // Job status (open/closed)
     applicationDeadline: { type: Date }, // Deadline for job applications  
     requirements: [String], // List of required skills or qualifications
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User',
+    },
 });
 
 jobSchema.set('toJSON', {

@@ -1,34 +1,34 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddJobPage = () => {
   const navigate = useNavigate();
 
-  const [title, setTitle] = useState('');
-  const [type, setType] = useState('');
-  const [description, setDescription] = useState('');
-  const [companyName, setCompanyName] = useState('');
-  const [contactEmail, setContactEmail] = useState('');
-  const [contactPhone, setContactPhone] = useState('');
-  const [website, setWebsite] = useState('');
-  const [location, setLocation] = useState('');
-  const [salary, setSalary] = useState('');
-  const [postedDate, setPostedDate] = useState('');
-  const [stat, setStat] = useState('');
-  const [applicationDeadline, setApplicationDeadline] = useState('');
-  const [requirements, setRequirements] = useState('');
+  const [title, setTitle] = useState("");
+  const [type, setType] = useState("");
+  const [description, setDescription] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [website, setWebsite] = useState("");
+  const [location, setLocation] = useState("");
+  const [salary, setSalary] = useState("");
+  const [postedDate, setPostedDate] = useState("");
+  const [stat, setStat] = useState("");
+  const [applicationDeadline, setApplicationDeadline] = useState("");
+  const [requirements, setRequirements] = useState("");
 
   const addJob = async (newJob) => {
     try {
-      const res = await fetch('/api/jobs', {
-        method: 'POST',
+      const res = await fetch("/api/jobs", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(newJob),
       });
       if (!res.ok) {
-        throw new Error('Failed to add job');
+        throw new Error("Failed to add job");
       }
     } catch (error) {
       console.error(error);
@@ -58,14 +58,14 @@ const AddJobPage = () => {
       },
       location,
       salary,
-      postedDate,
+      postedDate: postedDate.split("T")[0],
       stat,
       applicationDeadline,
       requirements: requirementsArray, //add as an array
     };
 
     addJob(newJob);
-    navigate('/');
+    navigate("/");
   };
 
   return (

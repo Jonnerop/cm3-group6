@@ -60,9 +60,9 @@ const EditJobPage = () => {
         setWebsite(data.company.website);
         setLocation(data.location);
         setSalary(data.salary);
-        setPostedDate(data.postedDate);
+        setPostedDate(data.postedDate.split("T")[0]);
         setStat(data.stat);
-        setApplicationDeadline(data.applicationDeadline);
+        setApplicationDeadline(data.applicationDeadline.split("T")[0]);
         setRequirements(data.requirements);
       } catch (error) {
         console.error('Error:', error);
@@ -78,26 +78,26 @@ const EditJobPage = () => {
     e.preventDefault();
 
     const updatedJob = {
-      id: job.id,
+      id: job._id,
       title,
       type,
       description,
       company: {
-        companyName,
-        companyEmail,
-        companyPhone,
-        companyUrl,
+        name: companyName,
+        contactEmail,
+        contactPhone,
+        website,
       },
       location,
       salary,
       postedDate,
-      stat,
+      status: stat,
       applicationDeadline,
       requirements,
     };
     const success = await updateJob(updatedJob);
     if (success) {
-      navigate(`/jobs/${job.id}`);
+      navigate(`/job/${job._id}`);
     } else {
       alert('Failed to update job');
       console.error('Failed to update job');
