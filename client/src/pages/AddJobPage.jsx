@@ -1,12 +1,8 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const EditJobPage = () => {
+const AddJobPage = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const { id } = useParams();
-  const [job, setJob] = useState(null);
 
   const [title, setTitle] = useState('');
   const [type, setType] = useState('');
@@ -22,63 +18,29 @@ const EditJobPage = () => {
   const [applicationDeadline, setApplicationDeadline] = useState('');
   const [requirements, setRequirements] = useState('');
 
-  const updateJob = async (updatedJob) => {
+  const addJob = async (newJob) => {
     try {
-      const response = await fetch(`/api/jobs/${updatedJob.id}`, {
-        method: 'PUT',
+      const res = await fetch('/api/jobs', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updatedJob),
+        body: JSON.stringify(newJob),
       });
-      if (!response.ok) {
-        throw new Error('Failed to update job');
+      if (!res.ok) {
+        throw new Error('Failed to add job');
       }
-      return response.ok;
     } catch (error) {
-      console.error('Error updating job:', error);
+      console.error(error);
       return false;
     }
+    return true;
   };
 
-  useEffect(() => {
-    const fetchJob = async () => {
-      try {
-        const response = await fetch(`/api/jobs/${id}`);
-        if (!response.ok) {
-          throw new Error(`Could not fetch job, status: ${response.status}`);
-        }
-        const data = await response.json();
-        setJob(data);
-
-        setTitle(data.title);
-        setType(data.type);
-        setDescription(data.description);
-        setCompanyName(data.company.name);
-        setContactEmail(data.company.contactEmail);
-        setContactPhone(data.company.contactPhone);
-        setWebsite(data.company.website);
-        setLocation(data.location);
-        setSalary(data.salary);
-        setPostedDate(data.postedDate);
-        setStat(data.stat);
-        setApplicationDeadline(data.applicationDeadline);
-        setRequirements(data.requirements);
-      } catch (error) {
-        console.error('Error:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchJob();
-  }, [id]);
-
-  const submitHandler = async (e) => {
+  const submitForm  = (e) => {
     e.preventDefault();
 
-    const updatedJob = {
-      id: job.id,
+    const newJob = {
       title,
       type,
       description,
@@ -95,22 +57,14 @@ const EditJobPage = () => {
       applicationDeadline,
       requirements,
     };
-    const success = await updateJob(updatedJob);
-    if (success) {
-      navigate(`/jobs/${job.id}`);
-    } else {
-      alert('Failed to update job');
-      console.error('Failed to update job');
-    }
+    addJob(newJob);
+    navigate('/');
   };
 
   return (
-    <div id="editJobPage">
-      <h1>Edit Job</h1>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <form onSubmit={submitHandler}>
+    <div id="addJobPage">
+      <h1>Add Job</h1>
+        <form onSubmit={submitForm}>
           <label htmlFor="title">Title</label>
           <input
             type="text"
@@ -157,7 +111,7 @@ const EditJobPage = () => {
             type="url"
             id="companyUrl"
             value={website}
-            onChange={(e) => setCompanyUrl(e.target.value)}
+            onChange={(e) => setWebsite(e.target.value)}
           />
           <label htmlFor="location">Location</label>
           <input
@@ -200,11 +154,10 @@ const EditJobPage = () => {
             value={requirements}
             onChange={(e) => setRequirements(e.target.value)}
           />
-          <button type="submit">Update Job</button>
+          <button type="submit">Add Job</button>
         </form>
-      )}
     </div>
   );
 };
 
-export default EditJobPage;
+export default AddJobPage;
