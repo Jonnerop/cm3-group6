@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import JobListing from "../components/JobListing";
+import { useParams } from "react-router-dom";
 
-function JobPage(id) {
+function JobPage() {
+  const { id } = useParams();
   const [job, setJob] = useState([]);
 
   useEffect(() => {
@@ -12,7 +14,7 @@ function JobPage(id) {
           throw new Error(res.statusText);
         }
         const data = await res.json();
-        setJob(...data);
+        setJob(data);
       } catch (error) {
         console.error(error);
       }

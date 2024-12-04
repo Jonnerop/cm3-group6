@@ -1,6 +1,6 @@
 const Navbar = () => {
   return (
-    <nav id="navbar">
+    <nav id="navbar" className="flex">
       <h1>Job Search</h1>
       <div id="links">
         <a href="/">Home</a>
