@@ -3,6 +3,7 @@ const supertest = require('supertest');
 const app = require('../app');
 const Job = require('../models/jobModel');
 const api = supertest(app);
+const User = require('../models/userModel');
 
 const initialJobs = [
     {
@@ -49,10 +50,38 @@ const initialJobs = [
     }
 ];
 
+let token = null;
+
+
+beforeAll(async () => {
+    await User.deleteMany({});
+    const user = await api.post('/api/users/signup').send({
+        name: 'Test User',
+        username: 'testuser',
+        password: 'password',
+        phone_number: '123-456-7890',
+        gender: 'female',
+        date_of_birth: '1990-01-01',
+        membership_status: 'active',
+        address: '123 Test St.',
+        profile_picture: ''
+    });
+    token = user.body.token;
+});
+
 describe('Jobs API', () => {
     beforeEach(async () => {
         await Job.deleteMany({});
-        await Job.insertMany(initialJobs);
+        await Promise.all([
+            api
+                .post("/api/jobs")
+                .set("Authorization", "bearer " + token)
+                .send(initialJobs[0]),
+            api
+                .post("/api/jobs")
+                .set("Authorization", "bearer " + token)
+                .send(initialJobs[1]),
+        ]);;
     });
 
     afterAll(() => {
@@ -62,7 +91,7 @@ describe('Jobs API', () => {
     describe("Fetching jobs", () => {
         describe("GET /api/jobs", () => {
             it("should return all jobs", async () => {
-                const response = await api.get('/api/jobs');
+                const response = await api.get('/api/jobs')
                 expect(response.status).toBe(200);
                 expect(response.body).toHaveLength(initialJobs.length);
             });
@@ -101,75 +130,80 @@ describe('Jobs API', () => {
                 };
                 const response = await api
                     .post('/api/jobs')
+                    .set('Authorization', 'bearer ' + token)
                     .send(newJob)
                     .expect(201)
                     .expect('Content-Type', /application\/json/);
 
-                const jobsAtEnd = await Job.find({});
-                expect(jobsAtEnd).toHaveLength(initialJobs.length + 1);
-                expect(response.body.title).toBe(newJob.title);
-            });
+            const jobsAtEnd = await Job.find({});
+            expect(jobsAtEnd).toHaveLength(initialJobs.length + 1);
+            expect(response.body.title).toBe(newJob.title);
         });
     });
+});
 
-    describe("Fetching a single job", () => {
-        describe("GET /api/jobs/:id", () => {
-            it("should return a single job", async () => {
-                const job = await Job.findOne();
-                const response = await api
-                    .get(`/api/jobs/${job.id}`)
-                    .expect(200)
-                    .expect('Content-Type', /application\/json/);
-                expect(response.body.title).toBe(job.title);
-            });
-            it("should return 400 if job does not exist", async () => {
-                const invalidId = "123456789012";
-                await api
-                    .get(`/api/jobs/${invalidId}`)
-                    .expect(400);
-            });
+describe("Fetching a single job", () => {
+    describe("GET /api/jobs/:id", () => {
+        it("should return a single job", async () => {
+            const job = await Job.findOne();
+            const response = await api
+                .get(`/api/jobs/${job.id}`)
+                .expect(200)
+                .expect('Content-Type', /application\/json/);
+            expect(response.body.title).toBe(job.title);
+        });
+        it("should return 400 if job does not exist", async () => {
+            const invalidId = "123456789012";
+            await api
+                .get(`/api/jobs/${invalidId}`)
+                .expect(400);
         });
     });
+});
 
-    describe("Updating a job", () => {
-        describe("PUT /api/jobs/:id", () => {
-            it("should update a job", async () => {
-                const job = await Job.findOne();
-                const updatedJob = {
-                    "type": "Part-time",
-                };
-                await api
-                    .put(`/api/jobs/${job.id}`)
-                    .send(updatedJob)
-                    .expect(200)
-                    .expect('Content-Type', /application\/json/);
-            });
-            it("should return 400 if job does not exist", async () => {
-                const invalidId = "123456789012";
-                await api
-                    .put(`/api/jobs/${invalidId}`)
-                    .expect(400);
-            });
+describe("Updating a job", () => {
+    describe("PUT /api/jobs/:id", () => {
+        it("should update a job", async () => {
+            const job = await Job.findOne();
+            const updatedJob = {
+                "type": "Part-time",
+            };
+            await api
+                .put(`/api/jobs/${job.id}`)
+                .set('Authorization', 'bearer ' + token)
+                .send(updatedJob)
+                .expect(200)
+                .expect('Content-Type', /application\/json/);
+        });
+        it("should return 400 if job does not exist", async () => {
+            const invalidId = "123456789012";
+            await api
+                .put(`/api/jobs/${invalidId}`)
+                .set('Authorization', 'bearer ' + token)
+                .expect(400);
         });
     });
+});
 
-    describe("Deleting a job", () => {
-        describe("DELETE /api/jobs/:id", () => {
-            it("should delete a job", async () => {
-                const job = await Job.findOne();
-                await api
-                    .delete(`/api/jobs/${job.id}`)
-                    .expect(200);
-                const jobsAtEnd = await Job.find({});
-                expect(jobsAtEnd).toHaveLength(initialJobs.length - 1);
-            });
-            it("should return 400 if job does not exist", async () => {
-                const invalidId = "123456789012";
-                await api
-                    .delete(`/api/jobs/${invalidId}`)
-                    .expect(400);
-            });
+describe("Deleting a job", () => {
+    describe("DELETE /api/jobs/:id", () => {
+        it("should delete a job", async () => {
+            const job = await Job.findOne();
+            await api
+                .delete(`/api/jobs/${job.id}`)
+                .set('Authorization', 'bearer ' + token)
+                .expect(204);
+            const jobsAtEnd = await Job.find({});
+            expect(jobsAtEnd).toHaveLength(initialJobs.length - 1);
+        });
+        it("should return 400 if job does not exist", async () => {
+            const invalidId = "123456789012";
+            await api
+                .delete(`/api/jobs/${invalidId}`)
+                .set('Authorization', 'bearer ' + token)
+                .expect(400);
         });
     });
+});
 });
 

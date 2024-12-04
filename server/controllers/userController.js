@@ -7,27 +7,28 @@ const generateToken = (_id) => {
 };
 
 const signup = async (req, res) => {
-    const { name, 
-        username, 
-        password, 
+    const { name,
+        username,
+        password,
         phone_number,
-        gender, 
-        date_of_birth, 
-        membership_status, 
+        gender,
+        date_of_birth,
+        membership_status,
         address,
-        profile_picture 
+        profile_picture
     } = req.body;
     try {
-        if (!name || 
-            !username || 
+        if (!name ||
+            !username ||
             !password ||
-            !phone_number || 
-            !gender || 
+            !phone_number ||
+            !gender ||
             !date_of_birth ||
-            !membership_status || 
+            !membership_status ||
             !address
         ) {
-            res.status(400).json({ message: "All fields are required" });
+            res.status(400);
+            throw new Error("Please add all fields");
         }
 
         const userExists = await User.findOne({ username });
@@ -50,7 +51,7 @@ const signup = async (req, res) => {
             const token = generateToken(user._id);
             res.status(201).json({ username, token });
         } else {
-            res.status(400).json({ message: "Invalid user data" });
+            res.status(400);
             throw new Error('Invalid user data');
         }
     } catch (error) {
