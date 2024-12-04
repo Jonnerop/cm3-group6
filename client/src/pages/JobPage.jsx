@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import JobListing from '../components/JobListing';
 import { useParams } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthProvider';
 
 function JobPage() {
   const { id } = useParams();
   const [job, setJob] = useState([]);
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   const user = JSON.parse(localStorage.getItem('user'));
-  const token = user.token;
+  const token = user ? user.token : null;
 
   useEffect(() => {
     const fetchJob = async () => {
@@ -56,6 +58,7 @@ function JobPage() {
         className="flex flex-col bg-[#E0E0E0] border rounded-lg shadow-md p-4"
       >
         <JobListing {...job} />
+        {isAuthenticated ? (
         <div className="flex justify-between">
           <button className="m-2 p-2 bg-[#607D8B] text-[#81D4FA] text-lg font-semibold rounded-md">
             Apply
@@ -72,6 +75,7 @@ function JobPage() {
             Delete Job
           </button>
         </div>
+        ) : null}
       </div>
     </div>
   );
