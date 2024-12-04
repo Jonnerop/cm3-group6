@@ -9,6 +9,8 @@ const Navbar = () => {
         <a href="/create" className="mx-4">
           Add Job
         </a>
+        <a href="/signup" className="mx-4">Sign Up</a>
+        <a href="/login" className="mx-4">Login</a>
       </div>
     </nav>
   );

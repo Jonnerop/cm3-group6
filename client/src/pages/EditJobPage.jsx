@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const EditJobPage = () => {
   const navigate = useNavigate();
@@ -8,35 +8,35 @@ const EditJobPage = () => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
 
-  const [title, setTitle] = useState("");
-  const [type, setType] = useState("");
-  const [description, setDescription] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [contactPhone, setContactPhone] = useState("");
-  const [website, setWebsite] = useState("");
-  const [location, setLocation] = useState("");
-  const [salary, setSalary] = useState("");
-  const [postedDate, setPostedDate] = useState("");
-  const [stat, setStat] = useState("");
-  const [applicationDeadline, setApplicationDeadline] = useState("");
-  const [requirements, setRequirements] = useState("");
+  const [title, setTitle] = useState('');
+  const [type, setType] = useState('');
+  const [description, setDescription] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
+  const [website, setWebsite] = useState('');
+  const [location, setLocation] = useState('');
+  const [salary, setSalary] = useState('');
+  const [postedDate, setPostedDate] = useState('');
+  const [stat, setStat] = useState('');
+  const [applicationDeadline, setApplicationDeadline] = useState('');
+  const [requirements, setRequirements] = useState('');
 
   const updateJob = async (updatedJob) => {
     try {
       const response = await fetch(`/api/jobs/${updatedJob.id}`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(updatedJob),
       });
       if (!response.ok) {
-        throw new Error("Failed to update job");
+        throw new Error('Failed to update job');
       }
       return response.ok;
     } catch (error) {
-      console.error("Error updating job:", error);
+      console.error('Error updating job:', error);
       return false;
     }
   };
@@ -65,7 +65,7 @@ const EditJobPage = () => {
         setApplicationDeadline(data.applicationDeadline);
         setRequirements(data.requirements);
       } catch (error) {
-        console.error("Error:", error);
+        console.error('Error:', error);
       } finally {
         setLoading(false);
       }
@@ -99,8 +99,8 @@ const EditJobPage = () => {
     if (success) {
       navigate(`/jobs/${job.id}`);
     } else {
-      alert("Failed to update job");
-      console.error("Failed to update job");
+      alert('Failed to update job');
+      console.error('Failed to update job');
     }
   };
 
@@ -109,39 +109,40 @@ const EditJobPage = () => {
       id="editJobPage"
       className="min-h-screen bg-[#B3E5FC] flex items-center justify-center py-8"
     >
-      <div className="max-w-xl w-full space-y-8 bg-white p-6 rounded-lg shadow-lg">
-        <h1 className="text-2xl font-bold text-[#607D8B]">Edit Job</h1>
+      <div className="max-w-lg w-full bg-white p-6 rounded-lg shadow-lg">
+        <h1 className="text-2xl font-bold text-[#607D8B] mb-6 text-center">
+          Edit Job
+        </h1>
         {loading ? (
           <div className="text-center text-[#607D8B]">Loading...</div>
         ) : (
-          <form onSubmit={submitHandler} className="grid grid-cols-1 gap-6">
+          <form onSubmit={submitHandler} className="space-y-4">
             <div>
               <label
-                htmlFor="title"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="title"
               >
-                Title
+                Title:
               </label>
               <input
                 type="text"
                 id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
-            <div className="flex flex-col items-center justify-center">
+            <div>
               <label
-                htmlFor="type"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="type"
               >
-                Type
+                Type:
               </label>
-
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="mt-1 pt-2 block rounded-md shadow-md text-[#607D8B] bg-[#E0E0E0]"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               >
                 <option value="Full-Time">Full-Time</option>
                 <option value="Part-Time">Part-Time</option>
@@ -151,176 +152,174 @@ const EditJobPage = () => {
             </div>
             <div>
               <label
-                htmlFor="description"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="description"
               >
-                Description
+                Description:
               </label>
               <textarea
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
             <div>
               <label
-                htmlFor="companyName"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="companyName"
               >
-                Company Name
+                Company Name:
               </label>
               <input
                 type="text"
                 id="companyName"
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
-                className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
             <div>
               <label
-                htmlFor="companyEmail"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="contactEmail"
               >
-                Company Email
+                Company Email:
               </label>
               <input
                 type="email"
-                id="companyEmail"
+                id="contactEmail"
                 value={contactEmail}
                 onChange={(e) => setContactEmail(e.target.value)}
-                className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
             <div>
               <label
-                htmlFor="companyPhone"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="contactPhone"
               >
-                Company Phone
+                Company Phone:
               </label>
               <input
                 type="tel"
-                id="companyPhone"
+                id="contactPhone"
                 value={contactPhone}
                 onChange={(e) => setContactPhone(e.target.value)}
-                className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
             <div>
               <label
-                htmlFor="companyUrl"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="companyUrl"
               >
-                Company URL
+                Company URL:
               </label>
               <input
                 type="url"
                 id="companyUrl"
                 value={website}
                 onChange={(e) => setCompanyUrl(e.target.value)}
-                className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
             <div>
               <label
-                htmlFor="location"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="location"
               >
-                Location
+                Location:
               </label>
               <input
                 type="text"
                 id="location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
             <div>
               <label
-                htmlFor="salary"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="salary"
               >
-                Salary
+                Salary:
               </label>
               <input
                 type="number"
                 id="salary"
                 value={salary}
                 onChange={(e) => setSalary(e.target.value)}
-                className="mt-1 block w-full rounded-md border-[#B0BEC5] shadow-md"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
             <div>
               <label
-                htmlFor="postedDate"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="postedDate"
               >
-                Posted Date
+                Posted Date:
               </label>
               <input
                 type="date"
                 id="postedDate"
                 value={postedDate}
                 onChange={(e) => setPostedDate(e.target.value)}
-                className="mt-1 p-1 block w-full rounded-md bg-[#E0E0E0] shadow-md text-[#607D8B]"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
-            <div div className="flex flex-col items-center justify-center">
+            <div>
               <label
-                htmlFor="stat"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="stat"
               >
-                Status
+                Status:
               </label>
               <select
                 value={stat}
                 onChange={(e) => setStat(e.target.value)}
-                className="mt-1 pt-2 block rounded-md shadow-md text-[#607D8B] bg-[#E0E0E0]"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               >
                 <option value="Open">Open</option>
-                <option value="Cloder">Closed</option>
+                <option value="Closed">Closed</option>
               </select>
             </div>
             <div>
               <label
-                htmlFor="applicationDeadline"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="applicationDeadline"
               >
-                Application Deadline
+                Application Deadline:
               </label>
               <input
                 type="date"
                 id="applicationDeadline"
                 value={applicationDeadline}
                 onChange={(e) => setApplicationDeadline(e.target.value)}
-                className="mt-1 p-1 block w-full rounded-md bg-[#E0E0E0] shadow-md text-[#607D8B]"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
             <div>
               <label
-                htmlFor="requirements"
                 className="block text-sm font-medium text-[#607D8B]"
+                htmlFor="requirements"
               >
-                Requirements
+                Requirements:
               </label>
               <textarea
                 id="requirements"
                 value={requirements}
                 onChange={(e) => setRequirements(e.target.value)}
-                className="mt-1 block w-full rounded-md border-[#E0E0E0] shadow-md"
+                className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
-            <div>
-              <button
-                type="submit"
-                className="w-full py-2 px-4 bg-[#607D8B] text-white rounded-md shadow-md"
-              >
-                Update Job
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="w-full py-2 px-4 bg-[#29B6F6] text-white rounded-md shadow-sm hover:bg-[#4FC3F7] font-medium"
+            >
+              Update Job
+            </button>
           </form>
         )}
       </div>
