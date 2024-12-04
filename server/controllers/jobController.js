@@ -16,8 +16,28 @@ const getAllJobs = async (req, res) => {
 //POST a new job
 const createJob = async (req, res) => {
   try {
-    const user_id = req.user._id;
-    const newJob = await Job.create({ ...req.body, user_id: user_id });
+    const {
+      title,
+      type,
+      description,
+      company,
+      location,
+      salary,
+      user_id,
+    } = req.body;
+
+    if (!title || !type || !description
+      || !location || !salary || !company?.name
+      || !company?.contactEmail || !company?.contactPhone) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    const userId = req.user._id;
+    const newJob = await Job.create({
+      ...req.body,
+      user_id: userId,
+    });
+
     res.status(201).json(newJob);
   } catch (error) {
     res.status(500).json({ message: `Failed to create job: ${error.message}` });
