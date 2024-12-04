@@ -14,7 +14,8 @@ const getAllJobs = async (req, res) => {
 //POST a new job
 const createJob = async (req, res) => {
     try {
-        const newJob = await Job.create({ ...req.body });
+        const user_id = req.user._id;
+        const newJob = await Job.create({ ...req.body, user_id: user_id });
         res.status(201).json(newJob);
     } catch (error) {
         res.status(500).json({ message: `Failed to create job: ${error.message}` });
@@ -50,8 +51,9 @@ const updateJob = async (req, res) => {
     }
 
     try {
+        const user_id = req.user._id;
         const updatedJob = await Job.findOneAndUpdate(
-            { _id: jobId },
+            { _id: jobId, user_id: user_id },
             { ...req.body },
             { new: true }
         );
@@ -74,11 +76,12 @@ const deleteJob = async (req, res) => {
     }
 
     try {
-        const deletedJob = await Job.findOneAndDelete({_id: jobId});
+        const user_id = req.user._id;
+        const deletedJob = await Job.findOneAndDelete({_id: jobId, user_id: user_id});
         if (!deletedJob) {
             res.status(404).json({ message: `Job with ID ${jobId} not found` });
         } else {
-            res.status(200).json({ message: `Job with ID ${jobId} deleted successfully` });
+            res.status(204).send();
         }
     } catch (error) {
         res.status(500).json({ message: `Failed to delete job: ${error.message}` });
