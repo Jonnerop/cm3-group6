@@ -2,9 +2,9 @@ import useField from '../hooks/useField';
 import useLogin from '../hooks/useLogin';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = () => {
   const navigate = useNavigate();
-  const email = useField('email');
+  const username = useField('username');
   const password = useField('password');
 
   const { login, error } = useLogin(`/api/users/login`);
@@ -12,13 +12,12 @@ const Login = ({ setIsAuthenticated }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     await login({
-      email: email.value,
+      username: username.value,
       password: password.value,
     });
     if (!error) {
       console.log('success');
       navigate('/');
-      setIsAuthenticated(true);
     }
   };
 
@@ -31,11 +30,11 @@ const Login = ({ setIsAuthenticated }) => {
         <form onSubmit={handleFormSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-[#607D8B]">
-              Email address:
+              Username:
             </label>
             <input
-              {...email}
-              type="email"
+              {...username}
+              type="text"
               className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
             />
           </div>

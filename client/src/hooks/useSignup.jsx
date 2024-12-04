@@ -9,8 +9,7 @@ export default function useSignup(url) {
     setError(null);
     const response = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(object),
+      body: object,
     });
     const user = await response.json();
 
