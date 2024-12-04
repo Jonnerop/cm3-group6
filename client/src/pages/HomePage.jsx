@@ -23,12 +23,10 @@ const HomePage = () => {
     fetchJobs();
   }, [jobs]);
 
-  console.log(isPending);
-
   return (
-    <div id="homePage" className="flex flex-col">
+    <div id="homePage" className="flex flex-col bg-[#F5F5F5]">
       <div className="flex m-auto">
-        <h1>Job Listings</h1>
+        <h1 className="text-[#29B6F6] text-xl font-semibold">Job Listings</h1>
       </div>
       <div id="Jobs-container" className="flex flex-wrap justify-between">
         {isPending && <div className="border">Loading...</div>}

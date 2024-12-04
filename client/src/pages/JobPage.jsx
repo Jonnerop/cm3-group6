@@ -23,12 +23,23 @@ function JobPage() {
   }, [id]);
 
   return (
-    <div className="border border-red-500">
-      <JobListing {...job} />
-      <div className="flex">
-        <button>Apply</button>
-        <button>Edit Job</button>
-        <button>Delete Job</button>
+    <div className="flex bg-[#F5F5F5] justify-center items-center w-screen h-[100%]">
+      <div
+        id="job-container"
+        className="flex flex-col bg-[#E0E0E0] border rounded-lg shadow-md p-4"
+      >
+        <JobListing {...job} />
+        <div className="flex">
+          <button className="m-2 p-2 bg-[#607D8B] text-[#81D4FA] text-lg font-semibold">
+            Apply
+          </button>
+          <button className="m-2 p-2 bg-[#607D8B] text-[#81D4FA] text-lg font-semibold">
+            Edit Job
+          </button>
+          <button className="m-2 p-2 bg-[#607D8B] text-[#81D4FA] text-lg font-semibold">
+            Delete Job
+          </button>
+        </div>
       </div>
     </div>
   );
