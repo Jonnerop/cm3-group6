@@ -135,75 +135,75 @@ describe('Jobs API', () => {
                     .expect(201)
                     .expect('Content-Type', /application\/json/);
 
-            const jobsAtEnd = await Job.find({});
-            expect(jobsAtEnd).toHaveLength(initialJobs.length + 1);
-            expect(response.body.title).toBe(newJob.title);
+                const jobsAtEnd = await Job.find({});
+                expect(jobsAtEnd).toHaveLength(initialJobs.length + 1);
+                expect(response.body.title).toBe(newJob.title);
+            });
         });
     });
-});
 
-describe("Fetching a single job", () => {
-    describe("GET /api/jobs/:id", () => {
-        it("should return a single job", async () => {
-            const job = await Job.findOne();
-            const response = await api
-                .get(`/api/jobs/${job.id}`)
-                .expect(200)
-                .expect('Content-Type', /application\/json/);
-            expect(response.body.title).toBe(job.title);
-        });
-        it("should return 400 if job does not exist", async () => {
-            const invalidId = "123456789012";
-            await api
-                .get(`/api/jobs/${invalidId}`)
-                .expect(400);
+    describe("Fetching a single job", () => {
+        describe("GET /api/jobs/:id", () => {
+            it("should return a single job", async () => {
+                const job = await Job.findOne();
+                const response = await api
+                    .get(`/api/jobs/${job.id}`)
+                    .expect(200)
+                    .expect('Content-Type', /application\/json/);
+                expect(response.body.title).toBe(job.title);
+            });
+            it("should return 400 if job does not exist", async () => {
+                const invalidId = "123456789012";
+                await api
+                    .get(`/api/jobs/${invalidId}`)
+                    .expect(400);
+            });
         });
     });
-});
 
-describe("Updating a job", () => {
-    describe("PUT /api/jobs/:id", () => {
-        it("should update a job", async () => {
-            const job = await Job.findOne();
-            const updatedJob = {
-                "type": "Part-time",
-            };
-            await api
-                .put(`/api/jobs/${job.id}`)
-                .set('Authorization', 'bearer ' + token)
-                .send(updatedJob)
-                .expect(200)
-                .expect('Content-Type', /application\/json/);
-        });
-        it("should return 400 if job does not exist", async () => {
-            const invalidId = "123456789012";
-            await api
-                .put(`/api/jobs/${invalidId}`)
-                .set('Authorization', 'bearer ' + token)
-                .expect(400);
+    describe("Updating a job", () => {
+        describe("PUT /api/jobs/:id", () => {
+            it("should update a job", async () => {
+                const job = await Job.findOne();
+                const updatedJob = {
+                    "type": "Part-time",
+                };
+                await api
+                    .put(`/api/jobs/${job.id}`)
+                    .set('Authorization', 'bearer ' + token)
+                    .send(updatedJob)
+                    .expect(200)
+                    .expect('Content-Type', /application\/json/);
+            });
+            it("should return 400 if job does not exist", async () => {
+                const invalidId = "123456789012";
+                await api
+                    .put(`/api/jobs/${invalidId}`)
+                    .set('Authorization', 'bearer ' + token)
+                    .expect(400);
+            });
         });
     });
-});
 
-describe("Deleting a job", () => {
-    describe("DELETE /api/jobs/:id", () => {
-        it("should delete a job", async () => {
-            const job = await Job.findOne();
-            await api
-                .delete(`/api/jobs/${job.id}`)
-                .set('Authorization', 'bearer ' + token)
-                .expect(204);
-            const jobsAtEnd = await Job.find({});
-            expect(jobsAtEnd).toHaveLength(initialJobs.length - 1);
-        });
-        it("should return 400 if job does not exist", async () => {
-            const invalidId = "123456789012";
-            await api
-                .delete(`/api/jobs/${invalidId}`)
-                .set('Authorization', 'bearer ' + token)
-                .expect(400);
+    describe("Deleting a job", () => {
+        describe("DELETE /api/jobs/:id", () => {
+            it("should delete a job", async () => {
+                const job = await Job.findOne();
+                await api
+                    .delete(`/api/jobs/${job.id}`)
+                    .set('Authorization', 'bearer ' + token)
+                    .expect(204);
+                const jobsAtEnd = await Job.find({});
+                expect(jobsAtEnd).toHaveLength(initialJobs.length - 1);
+            });
+            it("should return 400 if job does not exist", async () => {
+                const invalidId = "123456789012";
+                await api
+                    .delete(`/api/jobs/${invalidId}`)
+                    .set('Authorization', 'bearer ' + token)
+                    .expect(400);
+            });
         });
     });
-});
 });
 
