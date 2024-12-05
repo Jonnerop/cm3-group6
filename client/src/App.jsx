@@ -6,7 +6,6 @@ import JobPage from "./pages/JobPage";
 import AddJobPage from "./pages/AddJobPage";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import "./App.css";
 import AuthProvider from "./context/AuthProvider";
 import ProtectedRoute from "./context/ProtectedRoute";
 
