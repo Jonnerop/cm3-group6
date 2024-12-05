@@ -20,7 +20,7 @@ function JobListing({
       setDate(postedDate.split("T")[0]);
       setDeadline(applicationDeadline.split("T")[0]);
     }
-  }, []);
+  }, [postedDate, applicationDeadline]);
 
   return (
     <div className="bg-[#E0E0E0] p-2">
