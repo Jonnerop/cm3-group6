@@ -24,10 +24,10 @@ const HomePage = () => {
   }, [jobs]);
 
   return (
-    <div className="h-screen bg-[#F5F5F5]">
+    <div className="h-screen bg-[#B3E5FC]">
       <div id="homePage" className="flex flex-col">
         <div className="flex m-auto">
-          <h1 className="text-black text-2xl font-bold mt-4">JOB LISTINGS</h1>
+          <h1 className="text-white text-border text-2xl font-bold mt-4 [text-shadow:_0_1px_2px_black]">JOB LISTINGS</h1>
         </div>
         <div
           id="Jobs-container"

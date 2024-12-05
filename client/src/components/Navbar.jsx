@@ -18,23 +18,23 @@ const Navbar = () => {
         Job Search
       </h1>
       <div id="links" className="flex mr-72 items-center">
-        <a href="/" className="mx-6 text-[#29B6F6] text-xl font-semibold">
+        <a href="/" className="mx-5 text-[#29B6F6] text-xl font-semibold">
           Home
         </a>
-        <a href="/create" className="mx-6 text-[#29B6F6] text-xl font-semibold">
+        <a href="/create" className="mx-5 text-[#29B6F6] text-xl font-semibold">
           Add Job
         </a>
         {!isAuthenticated ? (
           <>
-            <a href="/signup" className="mx-6 text-[#29B6F6] text-xl font-semibold">
+            <a href="/signup" className="mx-5 text-[#29B6F6] text-xl font-semibold">
               Sign Up
             </a>
-            <a href="/login" className="mx-6 text-[#29B6F6] text-xl font-semibold">
+            <a href="/login" className="mx-5 text-[#29B6F6] text-xl font-semibold">
               Login
             </a>
           </>
         ) : (
-          <button onClick={logout} className="mx-6 text-[#29B6F6] text-xl font-semibold">
+          <button onClick={logout} className="mx-5 text-[#29B6F6] text-xl font-semibold">
             Logout
           </button>
         )}

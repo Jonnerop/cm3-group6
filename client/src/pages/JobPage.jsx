@@ -49,7 +49,7 @@ function JobPage() {
   };
 
   return (
-    <div className="flex bg-[#F5F5F5] justify-center w-screen h-screen">
+    <div className="flex bg-[#B3E5FC] justify-center w-screen h-screen">
       <div
         id="job-container"
         className="flex flex-col bg-[#E0E0E0] border rounded-lg shadow-md p-4 mt-8 h-[450px]"
