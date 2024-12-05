@@ -1,6 +1,7 @@
 ## Contributions
 
 | Member name | Tasks Completed | Contributions (%) |
+|---|---|---|
 |Ade|Backend API V1 & V2, backend testing|25%|
 |Heta|Frontend no-auth, Frontend auth, UI Styling|25%|
 |Mika|Frontend no-auth, Frontend auth, UI Styling|25%|
