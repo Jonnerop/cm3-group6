@@ -21,6 +21,7 @@ function JobListing({
       setDeadline(applicationDeadline.split("T")[0]);
     }
   }, []);
+
   return (
     <div className="bg-[#E0E0E0] p-2">
       <h2 className="text-[#29B6F6] text-3xl font-semibold text-center mb-2">
