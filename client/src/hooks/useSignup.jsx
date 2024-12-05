@@ -16,15 +16,14 @@ export default function useSignup(url) {
       });
 
       const user = await response.json();
-      setToken(user.token);
-      setIsAuthenticated(true);
-
       if (!response.ok) {
         setError(user.error || "Failed to sign up");
         setIsLoading(false);
         return null;
       }
 
+      setToken(user.token);
+      setIsAuthenticated(true);
       localStorage.setItem("user", JSON.stringify(user));
       setIsLoading(false);
       return user;

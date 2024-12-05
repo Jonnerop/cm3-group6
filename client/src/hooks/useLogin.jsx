@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useAuth } from '../context/AuthProvider';
+import { useState } from "react";
+import { useAuth } from "../context/AuthProvider";
 
 export default function useLogin(url) {
   const [error, setError] = useState(null);
@@ -9,21 +9,19 @@ export default function useLogin(url) {
     setIsLoading(true);
     setError(null);
     const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(object),
     });
     const user = await response.json();
-    setToken(user.token);
-    setIsAuthenticated(true);
-
     if (!response.ok) {
       setError(user.error);
       setIsLoading(false);
       return error;
     }
-
-    localStorage.setItem('user', JSON.stringify(user));
+    setToken(user.token);
+    setIsAuthenticated(true);
+    localStorage.setItem("user", JSON.stringify(user));
     setIsLoading(false);
   };
 
