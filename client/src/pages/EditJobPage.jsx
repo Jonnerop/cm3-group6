@@ -86,6 +86,7 @@ const EditJobPage = () => {
     e.preventDefault();
 
     const updatedJob = {
+      id: job._id,
       title,
       type,
       description,
