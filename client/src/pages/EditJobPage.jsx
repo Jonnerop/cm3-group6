@@ -50,7 +50,9 @@ const EditJobPage = () => {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const response = await fetch(`/api/jobs/${id}`);
+        const response = await fetch(
+          `https://cm3-group6-api-v2-auth-protection.onrender.com/api/jobs/${id}`
+        );
         if (!response.ok) {
           throw new Error(`Could not fetch job, status: ${response.status}`);
         }
