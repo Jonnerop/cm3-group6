@@ -132,5 +132,5 @@ The current signup-function includes error handling, debugging, and the ability 
 
 ### Key Improvements
 
--FormData: Uses FormData so that files can be transferred and uploaded.
--Error handling and debugging: Ensures the endpoint can optionally take in files.
+- FormData: Uses FormData so that files can be transferred and uploaded.
+- Error handling and debugging: Ensures the endpoint can optionally take in files.
