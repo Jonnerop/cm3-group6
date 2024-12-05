@@ -58,6 +58,6 @@ describe("Deleting a job", () => {
 
 ### Key Improvements
 
-- The updated tests account for edge cases, such as missing or invalid tokens making sure that the API properly handles these situations.
+- The updated tests make sure that only users with a valid JWT token can delete jobs. Previously the tests allowed anyone to delete a job without checking for any authentication.
 
 - Tests now align with the updated job controller where authentication is required. This way the tests are more robust and reflect the actual behavior of the API.
