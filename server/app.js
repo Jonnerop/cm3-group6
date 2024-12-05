@@ -7,7 +7,7 @@ const { unknownEndpoint, errorHandler } = require('./middleware/customMiddleware
 const cors = require('cors');
 
 const corsOptions = {
-    origin: 'https://cm3-group6-client.onrender.com', // Replace with your deployed frontend URL
+    origin: 'https://cm3-group6-front-with-auth.onrender.com/', // Replace with your deployed frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true, // Allow cookies if needed
 };
