@@ -84,7 +84,6 @@ const EditJobPage = () => {
     e.preventDefault();
 
     const updatedJob = {
-      id: job._id,
       title,
       type,
       description,
@@ -224,9 +223,9 @@ const EditJobPage = () => {
               </label>
               <input
                 type="url"
-                id="companyUrl"
+                id="website"
                 value={website}
-                onChange={(e) => setCompanyUrl(e.target.value)}
+                onChange={(e) => setWebsite(e.target.value)}
                 className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
