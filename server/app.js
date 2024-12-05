@@ -3,12 +3,18 @@ const app = express();
 const jobRouter = require('./routes/jobRouter');
 const userRouter = require('./routes/userRouter');
 const connectDB = require('./config/db');
-const {unknownEndpoint, errorHandler} = require('./middleware/customMiddleware');
+const { unknownEndpoint, errorHandler } = require('./middleware/customMiddleware');
 const cors = require('cors');
+
+const corsOptions = {
+    origin: 'https://your-frontend-url.onrender.com', // Replace with your deployed frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true, // Allow cookies if needed
+};
 
 require('dotenv').config();
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Connect to MongoDB
