@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 
 const EditJobPage = () => {
@@ -10,36 +10,39 @@ const EditJobPage = () => {
   const [job, setJob] = useState(null);
   const { user, token } = useAuth();
 
-  const [title, setTitle] = useState('');
-  const [type, setType] = useState('');
-  const [description, setDescription] = useState('');
-  const [companyName, setCompanyName] = useState('');
-  const [contactEmail, setContactEmail] = useState('');
-  const [contactPhone, setContactPhone] = useState('');
-  const [website, setWebsite] = useState('');
-  const [location, setLocation] = useState('');
-  const [salary, setSalary] = useState('');
-  const [postedDate, setPostedDate] = useState('');
-  const [stat, setStat] = useState('');
-  const [applicationDeadline, setApplicationDeadline] = useState('');
-  const [requirements, setRequirements] = useState('');
+  const [title, setTitle] = useState("");
+  const [type, setType] = useState("");
+  const [description, setDescription] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [website, setWebsite] = useState("");
+  const [location, setLocation] = useState("");
+  const [salary, setSalary] = useState("");
+  const [postedDate, setPostedDate] = useState("");
+  const [stat, setStat] = useState("");
+  const [applicationDeadline, setApplicationDeadline] = useState("");
+  const [requirements, setRequirements] = useState("");
 
   const updateJob = async (updatedJob) => {
     try {
-      const response = await fetch(`/api/jobs/${updatedJob.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(updatedJob),
-      });
+      const response = await fetch(
+        `https://cm3-group6-api-v2-auth-protection.onrender.com/api/jobs/${updatedJob.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(updatedJob),
+        }
+      );
       if (!response.ok) {
-        throw new Error('Failed to update job');
+        throw new Error("Failed to update job");
       }
       return response.ok;
     } catch (error) {
-      console.error('Error updating job:', error);
+      console.error("Error updating job:", error);
       return false;
     }
   };
@@ -63,12 +66,12 @@ const EditJobPage = () => {
         setWebsite(data.company.website);
         setLocation(data.location);
         setSalary(data.salary);
-        setPostedDate(data.postedDate.split('T')[0]);
+        setPostedDate(data.postedDate.split("T")[0]);
         setStat(data.stat);
-        setApplicationDeadline(data.applicationDeadline.split('T')[0]);
+        setApplicationDeadline(data.applicationDeadline.split("T")[0]);
         setRequirements(data.requirements);
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       } finally {
         setLoading(false);
       }
@@ -102,8 +105,8 @@ const EditJobPage = () => {
     if (success) {
       navigate(`/job/${job._id}`);
     } else {
-      alert('Failed to update job');
-      console.error('Failed to update job');
+      alert("Failed to update job");
+      console.error("Failed to update job");
     }
   };
 

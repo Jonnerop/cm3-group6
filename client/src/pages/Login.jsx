@@ -1,13 +1,15 @@
-import useField from '../hooks/useField';
-import useLogin from '../hooks/useLogin';
-import { useNavigate } from 'react-router-dom';
+import useField from "../hooks/useField";
+import useLogin from "../hooks/useLogin";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  const username = useField('username');
-  const password = useField('password');
+  const username = useField("username");
+  const password = useField("password");
 
-  const { login, error } = useLogin(`/api/users/login`);
+  const { login, error } = useLogin(
+    `https://cm3-group6-api-v2-auth-protection.onrender.com/api/users/login`
+  );
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -16,8 +18,8 @@ const Login = () => {
       password: password.value,
     });
     if (!error) {
-      console.log('success');
-      navigate('/');
+      console.log("success");
+      navigate("/");
     }
   };
 

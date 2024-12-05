@@ -14,7 +14,9 @@ const SignUp = () => {
   const membershipStatus = useField("text");
   const address = useField("text");
   const [profilePicture, setProfilePicture] = useState(null);
-  const { signup, error } = useSignup(`/api/users/signup`);
+  const { signup, error } = useSignup(
+    `https://cm3-group6-api-v2-auth-protection.onrender.com/api/users/signup`
+  );
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();

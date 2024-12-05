@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import JobListing from '../components/JobListing';
-import { useParams } from 'react-router-dom';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthProvider';
+import React, { useEffect, useState } from "react";
+import JobListing from "../components/JobListing";
+import { useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
 
 function JobPage() {
   const { id } = useParams();
@@ -13,7 +13,9 @@ function JobPage() {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const res = await fetch(`/api/jobs/${id}`);
+        const res = await fetch(
+          `https://cm3-group6-api-v2-auth-protection.onrender.com/api/jobs/${id}`
+        );
         if (!res.ok) {
           throw new Error(res.statusText);
         }
@@ -28,12 +30,15 @@ function JobPage() {
 
   const deleteJob = async () => {
     try {
-      const res = await fetch(`/api/jobs/${id}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `https://cm3-group6-api-v2-auth-protection.onrender.com/api/jobs/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (!res.ok) {
         throw new Error(res.statusText);
       }
@@ -45,7 +50,7 @@ function JobPage() {
   const handleDelete = (e) => {
     e.preventDefault();
     deleteJob();
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -56,22 +61,22 @@ function JobPage() {
       >
         <JobListing {...job} />
         {isAuthenticated ? (
-        <div className="flex justify-between">
-          <button className="m-2 p-2 bg-[#607D8B] text-[#81D4FA] text-lg font-semibold rounded-md">
-            Apply
-          </button>
-          <Link to={`/job/${job._id}/edit`}>
+          <div className="flex justify-between">
             <button className="m-2 p-2 bg-[#607D8B] text-[#81D4FA] text-lg font-semibold rounded-md">
-              Edit Job
+              Apply
             </button>
-          </Link>
-          <button
-            className="m-2 p-2 bg-[#607D8B] text-[#81D4FA] text-lg font-semibold rounded-md"
-            onClick={handleDelete}
-          >
-            Delete Job
-          </button>
-        </div>
+            <Link to={`/job/${job._id}/edit`}>
+              <button className="m-2 p-2 bg-[#607D8B] text-[#81D4FA] text-lg font-semibold rounded-md">
+                Edit Job
+              </button>
+            </Link>
+            <button
+              className="m-2 p-2 bg-[#607D8B] text-[#81D4FA] text-lg font-semibold rounded-md"
+              onClick={handleDelete}
+            >
+              Delete Job
+            </button>
+          </div>
         ) : null}
       </div>
     </div>
