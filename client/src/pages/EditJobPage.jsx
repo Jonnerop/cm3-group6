@@ -223,7 +223,7 @@ const EditJobPage = () => {
                 type="url"
                 id="companyUrl"
                 value={website}
-                onChange={(e) => setCompanyUrl(e.target.value)}
+                onChange={(e) => setWebsite(e.target.value)}
                 className="mt-1 block w-full rounded-md border-[#B0BEC5] bg-[#F5F5F5] p-2 shadow-sm"
               />
             </div>
