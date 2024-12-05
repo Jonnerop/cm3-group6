@@ -37,7 +37,7 @@ describe('User Routes', () => {
             });
 
             expect(response.status).toBe(400);
-            expect(response.body).toHaveProperty('message', 'Please add all fields');
+            expect(response.body).toHaveProperty('message', 'All fields are required');
         });
     });
 
