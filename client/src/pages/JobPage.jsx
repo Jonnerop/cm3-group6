@@ -3,6 +3,8 @@ import JobListing from "../components/JobListing";
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
+const server = import.meta.env.VITE_API_URL
+
 
 function JobPage() {
   const { id } = useParams();
@@ -14,7 +16,7 @@ function JobPage() {
     const fetchJob = async () => {
       try {
         const res = await fetch(
-          `https://cm3-group6-api-v2-auth-protection.onrender.com/api/jobs/${id}`
+          `${server}/api/jobs/${id}`
         );
         if (!res.ok) {
           throw new Error(res.statusText);
@@ -31,7 +33,7 @@ function JobPage() {
   const deleteJob = async () => {
     try {
       const res = await fetch(
-        `https://cm3-group6-api-v2-auth-protection.onrender.com/api/jobs/${id}`,
+        `${server}/api/jobs/${id}`,
         {
           method: "DELETE",
           headers: {

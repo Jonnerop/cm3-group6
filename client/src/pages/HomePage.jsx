@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import JobListings from "../components/JobListings";
+const server = import.meta.env.VITE_API_URL
+
 
 const HomePage = () => {
   const [jobs, setJobs] = useState([]);
@@ -9,7 +11,7 @@ const HomePage = () => {
     const fetchJobs = async () => {
       try {
         const response = await fetch(
-          "https://cm3-group6-api-v2-auth-protection.onrender.com/api/jobs"
+          `${server}/api/jobs`
         );
         if (!response.ok) {
           throw new Error(`Could not fetch jobs, status: ${response.status}`);

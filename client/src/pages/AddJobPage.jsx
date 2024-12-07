@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
+const server = import.meta.env.VITE_API_URL
 
 const AddJobPage = () => {
   const navigate = useNavigate();
   const { token } = useAuth();
+
 
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Full-Time");
@@ -24,7 +26,7 @@ const AddJobPage = () => {
     console.log(newJob);
     try {
       const res = await fetch(
-        "https://cm3-group6-api-v2-auth-protection.onrender.com/api/jobs",
+        `${server}/api/jobs`,
         {
           method: "POST",
           headers: {

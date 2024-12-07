@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
+const server = import.meta.env.VITE_API_URL
+
 
 const EditJobPage = () => {
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ const EditJobPage = () => {
   const updateJob = async (updatedJob) => {
     try {
       const response = await fetch(
-        `https://cm3-group6-api-v2-auth-protection.onrender.com/api/jobs/${updatedJob.id}`,
+        `${server}/api/jobs/${updatedJob.id}`,
         {
           method: "PUT",
           headers: {
@@ -51,7 +53,7 @@ const EditJobPage = () => {
     const fetchJob = async () => {
       try {
         const response = await fetch(
-          `https://cm3-group6-api-v2-auth-protection.onrender.com/api/jobs/${id}`
+          `${server}/api/jobs/${id}`
         );
         if (!response.ok) {
           throw new Error(`Could not fetch job, status: ${response.status}`);

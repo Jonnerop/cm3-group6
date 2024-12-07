@@ -1,6 +1,8 @@
 import useField from "../hooks/useField";
 import useLogin from "../hooks/useLogin";
 import { useNavigate } from "react-router-dom";
+const server = import.meta.env.VITE_API_URL
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -8,7 +10,7 @@ const Login = () => {
   const password = useField("password");
 
   const { login, error } = useLogin(
-    `https://cm3-group6-api-v2-auth-protection.onrender.com/api/users/login`
+    `${server}/api/users/login`
   );
 
   const handleFormSubmit = async (e) => {

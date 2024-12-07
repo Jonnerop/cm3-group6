@@ -2,6 +2,8 @@ import useField from "../hooks/useField";
 import useSignup from "../hooks/useSignup";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+const server = import.meta.env.VITE_API_URL
+
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -15,7 +17,7 @@ const SignUp = () => {
   const address = useField("text");
   const [profilePicture, setProfilePicture] = useState(null);
   const { signup, error } = useSignup(
-    `https://cm3-group6-api-v2-auth-protection.onrender.com/api/users/signup`
+    `${server}/api/users/signup`
   );
 
   const handleFormSubmit = async (e) => {
